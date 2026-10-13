@@ -1,0 +1,78 @@
+{
+  "rules": {
+    "Users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid && newData.exists() && (!data.child('role').exists() || newData.child('role').val() === data.child('role').val() || (data.child('role').val() === 'GUARDIAN' && newData.child('role').val() === 'PATIENT'))",
+        "role": {
+          ".validate": "newData.isString() && (newData.val() === 'PATIENT' || newData.val() === 'DOCTOR' || newData.val() === 'GUARDIAN') && (!data.exists() || newData.val() === data.val() || (data.val() === 'GUARDIAN' && newData.val() === 'PATIENT'))"
+        },
+        "guardianEnabled": {
+          ".validate": "newData.isBoolean()"
+        }
+      }
+    },
+    "Doctors": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "ConnectionRequests": {
+      ".indexOn": [
+        "guardianId",
+        "patientId"
+      ],
+      ".read": "auth != null && ((query.orderByChild === 'guardianId' && query.equalTo === auth.uid) || (query.orderByChild === 'patientId' && query.equalTo === auth.uid))",
+      "$requestId": {
+        ".read": "auth != null && (!data.exists() || data.child('patientId').val() === auth.uid || data.child('guardianId').val() === auth.uid)",
+        ".write": "auth != null && newData.exists() && ((newData.child('patientId').val() === auth.uid && newData.child('guardianId').val() !== auth.uid && newData.child('status').val() === 'PENDING' && (!data.exists() || data.child('status').val() === 'PENDING' || data.child('status').val() === 'REJECTED') && (root.child('Users').child(newData.child('guardianId').val()).child('guardianEnabled').val() === true || root.child('Users').child(newData.child('guardianId').val()).child('role').val() === 'GUARDIAN')) || (data.child('guardianId').val() === auth.uid && (root.child('Users').child(auth.uid).child('guardianEnabled').val() === true || root.child('Users').child(auth.uid).child('role').val() === 'GUARDIAN') && ((data.child('status').val() === 'PENDING' && (newData.child('status').val() === 'ACCEPTED' || newData.child('status').val() === 'REJECTED')) || (data.child('status').val() === 'ACCEPTED' && newData.child('status').val() === 'ACCEPTED'))))",
+        ".validate": "newData.hasChildren(['patientId','guardianId','status','timestamp']) && newData.child('patientId').isString() && newData.child('guardianId').isString() && newData.child('timestamp').isNumber() && (newData.child('status').val() === 'PENDING' || newData.child('status').val() === 'ACCEPTED' || newData.child('status').val() === 'REJECTED') && (!data.exists() || (newData.child('patientId').val() === data.child('patientId').val() && newData.child('guardianId').val() === data.child('guardianId').val()))"
+      }
+    },
+    "GuardianLinks": {
+      "$patientId": {
+        ".read": "auth != null && (auth.uid === $patientId || data.child(auth.uid).child(\"connected\").val() === true)",
+        "$guardianId": {
+          ".write": "auth != null && auth.uid === $guardianId && (root.child('Users').child(auth.uid).child('guardianEnabled').val() === true || root.child('Users').child(auth.uid).child('role').val() === 'GUARDIAN') && newData.child('connected').val() === true && root.child('ConnectionRequests').child(newData.child('requestId').val()).child('patientId').val() === $patientId && root.child('ConnectionRequests').child(newData.child('requestId').val()).child('guardianId').val() === auth.uid && (root.child('ConnectionRequests').child(newData.child('requestId').val()).child('status').val() === 'PENDING' || root.child('ConnectionRequests').child(newData.child('requestId').val()).child('status').val() === 'ACCEPTED')",
+          ".validate": "newData.hasChildren(['connected','connectedAt','requestId']) && newData.child('connectedAt').isNumber() && newData.child('requestId').isString()"
+        }
+      }
+    },
+    "GuardianAlerts": {
+      "$guardianId": {
+        ".read": "auth != null && auth.uid === $guardianId",
+        ".indexOn": [
+          "timestamp"
+        ],
+        "$alertId": {
+          ".write": "auth != null && newData.exists() && ((!data.exists() && newData.child('patientId').val() === auth.uid && root.child('GuardianLinks').child(auth.uid).child($guardianId).child('connected').val() === true && (root.child('Users').child($guardianId).child('guardianEnabled').val() === true || root.child('Users').child($guardianId).child('role').val() === 'GUARDIAN')) || (data.exists() && auth.uid === $guardianId && newData.child('patientId').val() === data.child('patientId').val() && newData.child('guardianId').val() === data.child('guardianId').val() && newData.child('patientName').val() === data.child('patientName').val() && newData.child('source').val() === data.child('source').val() && newData.child('reason').val() === data.child('reason').val() && newData.child('timestamp').val() === data.child('timestamp').val() && newData.child('bpm').val() === data.child('bpm').val() && newData.child('guardianCount').val() === data.child('guardianCount').val() && newData.child('pushStatus').val() === data.child('pushStatus').val()))",
+          ".validate": "newData.hasChildren(['patientId','guardianId','patientName','reason','source','timestamp','guardianCount','pushStatus']) && newData.child('guardianId').val() === $guardianId && newData.child('timestamp').isNumber() && newData.child('guardianCount').isNumber()",
+          "acknowledgedAt": {
+            ".validate": "newData.isNumber() && auth.uid === $guardianId"
+          }
+        }
+      }
+    },
+    "EmergencyAlerts": {
+      "$patientId": {
+        ".read": "auth != null && auth.uid === $patientId",
+        "$alertId": {
+          ".write": "auth != null && auth.uid === $patientId && !data.exists()",
+          ".validate": "newData.child('patientId').val() === $patientId && newData.child('timestamp').isNumber()"
+        }
+      }
+    },
+    "GuardianAlertState": {
+      "$patientId": {
+        ".read": "auth != null && auth.uid === $patientId",
+        ".write": "auth != null && auth.uid === $patientId",
+        ".validate": "newData.hasChildren(['lastSentAt','alertId']) && newData.child('lastSentAt').isNumber() && newData.child('alertId').isString()"
+      }
+    },
+    "GuardianDeviceRegistry": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

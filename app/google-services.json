@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953374806920",
+    "project_id": "pulse-diagnosis-36ce3",
+    "storage_bucket": "pulse-diagnosis-36ce3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953374806920:android:dabc6b1f640c2ad30e203d",
+        "android_client_info": {
+          "package_name": "com.example.pulsediagnosis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRfbrjrrudb0anQvYoBs33uuLwKZKfAAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

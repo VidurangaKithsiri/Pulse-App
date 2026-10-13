@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5EEEE"
+    android:backgroundTint="#935850"
+    tools:context=".Home"
+    tools:ignore="ExtraText">
+
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/heart"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Heart"
+        android:textColor="#F0E6E6"
+        android:textSize="10sp"
+        app:backgroundTint="#D5CD1919"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/channel"
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="Channel"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/diagnosis"
+        android:layout_width="91dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Diagnosis"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view8"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:background="#3B84D0"
+        android:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="94dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="292dp"
+        android:layout_marginBottom="26dp"
+        android:text="Home"
+        android:textAlignment="center"
+        android:textColor="#141414"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintTop_toTopOf="@+id/view7"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/bluetooth"
+        android:layout_width="25dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="13dp"
+        android:background="#295CEB"
+        app:layout_constraintBottom_toBottomOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="@+id/view7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/view7"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/stat_sys_data_bluetooth"
+        tools:ignore="MissingConstraints" />
+
+    <ViewAnimator
+        android:id="@+id/viewAnimator"
+        android:layout_width="393dp"
+        android:layout_height="317dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/secondary_text_light"
+        android:backgroundTintMode="add"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8"
+        tools:ignore="InvalidId">
+
+        <!-- Bluetooth Device List -->
+        <ListView
+            android:id="@+id/listBluetoothDevices"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@color/black"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp" />
+    </ViewAnimator>
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="341dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/circle_bg"
+        app:layout_constraintEnd_toEndOf="@+id/view8"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/view8"
+        app:layout_constraintTop_toTopOf="@+id/view8" />
+
+    <View
+        android:id="@+id/view23"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile"/>
+
+    <Button
+        android:id="@+id/vwProfile"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/view23"
+        app:layout_constraintEnd_toEndOf="@id/view23"/>
+
+    <Button
+        android:id="@+id/vwSettings"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/vwProfile"
+        app:layout_constraintEnd_toEndOf="@id/view23"/>
+    <Button
+        android:id="@+id/vwLogout"
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/vwSettings"
+        app:layout_constraintEnd_toEndOf="@id/view23"/>
+
+    <Button
+        android:id="@+id/flask"
+        android:layout_width="91dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginBottom="4dp"
+        android:text="Predict"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

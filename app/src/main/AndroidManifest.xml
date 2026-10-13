@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Existing permissions -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Bluetooth permissions for Android 11 and below -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+    <!-- Bluetooth permissions for Android 12+ -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS" />
+
+
+    <application
+        android:allowBackup="true"
+        android:clickable="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:focusableInTouchMode="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PulseDiagnosis"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="35">
+
+        <activity android:name=".SimulationActivity" android:exported="false" />
+        <activity android:name=".GuardianSelection" android:exported="false" />
+        <activity android:name=".GuardianRequests" android:exported="false" />
+        <activity
+            android:name=".Flask"
+            android:exported="true" />
+
+        <activity
+            android:name=".ForgetPassword"
+            android:exported="true" />
+
+        <activity
+            android:name=".PrivacySettings"
+            android:exported="true" />
+
+        <activity
+            android:name=".Settings"
+            android:exported="true" />
+
+        <activity
+            android:name=".item_doctor"
+            android:exported="true" />
+
+        <activity
+            android:name=".DrSignUp"
+            android:exported="true" />
+
+        <activity
+            android:name=".Profile"
+            android:exported="true" />
+
+        <activity
+            android:name=".Login"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".Signup"
+            android:exported="true" />
+
+        <activity
+            android:name=".Diagnosis"
+            android:exported="true" />
+
+        <activity
+            android:name=".DrChannel"
+            android:exported="true" />
+
+        <activity
+            android:name=".Heart_rate"
+            android:exported="true" />
+
+        <activity
+            android:name=".Home"
+            android:exported="true" />
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="true" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+
+            <intent-filter>
+
+                <action
+                    android:name="com.google.firebase.MESSAGING_EVENT" />
+
+            </intent-filter>
+
+        </service>
+
+    </application>
+
+</manifest>

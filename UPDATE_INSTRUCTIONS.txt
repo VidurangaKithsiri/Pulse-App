@@ -1,0 +1,4 @@
+Close Android Studio. Extract this ZIP into your EXISTING project root (the folder containing app and gradlew.bat). Choose Replace for matching files. Keep all other project files.
+Run 1_SETUP_GUARDIAN_BACKEND.cmd again to update Firebase. Then open your existing Android project, Sync Gradle and Run.
+Guardian consent is additional to patient/doctor signup. Home > Guardians contains requests and alerts. Live prediction appears on the capture screen and saves in Diagnosis history on this phone.
+This package does not include a new Android project or a prebuilt APK.
